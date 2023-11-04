@@ -54,14 +54,17 @@ model Aluno {
 
 model Event {
   id               String   @id
-  nome             String
+  nomeEvento       String
   descricao        String
-  email            String
+  emailEvento      String   @unique
   tipo             String
   assuntoPrincipal String
-  local            String
-  dataInicio       DateTime
-  dataFinal        DateTime
+  local            String  
+  cep              String
+  horarioInicio    String
+  horarioFim       String
+  dataInicio       DateTime?
+  dataFinal        DateTime?
   privado          Boolean
   anais            Boolean
   certificados     Boolean
@@ -71,6 +74,15 @@ model Event {
   comissao         Comissao @relation(fields: [comissaoId], references: [id])
   comissaoId       String   @unique
   Area             Area[]
+}
+
+model Sala{
+  id               String   @id
+  andar            Int
+  tipo             String
+  numero           Int      @unique
+  limitePessoas    Int
+  temaSala         String
 }
 
 // model User {

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { contComissao, contEvent, contAluno, contArea } from "../executors";
+import { contComissao, contEvent, contAluno, contArea, contSala } from "../executors";
 
 const routes = Router();
 
@@ -20,7 +20,7 @@ routes.get("/read-event/:id", (req, res) => {
         return contEvent
     })
 })
-routes.put("/update-event", (req, res) => {
+routes.put("/update-event/:id", (req, res) => {
     contEvent.update(req, res).then((contEvent) => {
         return contEvent
     })
@@ -47,7 +47,7 @@ routes.get("/read-comissao/:id", (req, res) => {
         return contComissao
     })
 })
-routes.put("/update-comissao", (req, res) => {
+routes.put("/update-comissao/:id", (req, res) => {
     contComissao.update(req, res).then((contComissao) => {
         return contComissao
     })
@@ -69,17 +69,17 @@ routes.get("/read-alunos", (req, res) => {
         return contAluno
     })
 })
-routes.get("/read-comissao/:id", (req, res) => {
+routes.get("/read-alunos/:id", (req, res) => {
     contAluno.readAluno(req, res).then((contAluno) => {
         return contAluno
     })
 })
-routes.put("/update-comissao", (req, res) => {
+routes.put("/update-alunos/:id", (req, res) => {
     contAluno.update(req, res).then((contAluno) => {
         return contAluno
     })
 })
-routes.delete("/delete-comissao/:id", (req, res) => {
+routes.delete("/delete-alunos/:id", (req, res) => {
     contAluno.delete(req, res).then((contAluno) => {
         return contAluno
     })
@@ -96,23 +96,48 @@ routes.get("/read-areas", (req, res) => {
         return contArea
     })
 })
-routes.get("/read-comissao/:id", (req, res) => {
+routes.get("/read-area/:id", (req, res) => {
     contArea.readArea(req, res).then((contArea) => {
         return contArea
     })
 })
-routes.put("/update-comissao", (req, res) => {
+routes.put("/update-area/:id", (req, res) => {
     contArea.update(req, res).then((contArea) => {
         return contArea
     })
 })
-routes.delete("/delete-comissao/:id", (req, res) => {
+routes.delete("/delete-area/:id", (req, res) => {
     contArea.delete(req, res).then((contArea) => {
         return contArea
     })
 })
 
-
+// SALA ROUTES
+routes.post("/create-sala", (req, res) => {
+    contSala.create(req, res).then((contSala) => {
+        return contSala
+    })
+})
+routes.get("/read-salas", (req, res) => {
+    contSala.read(req, res).then((contSala) => {
+        return contSala
+    })
+})
+routes.get("/read-sala/:id", (req, res) => {
+    contSala.readSala(req, res).then((contSala) => {
+        return contSala
+    })
+})
+routes.put("/update-sala/:id", (req, res) => {
+    contSala.update(req, res).then((contSala) => {
+        return contSala
+    })
+})
+routes.delete("/delete-sala/:id", (req, res) => {
+    contSala.delete(req, res).then((contSala) => {
+        return contSala
+    })
+})
 
 module.exports = { routes }
 

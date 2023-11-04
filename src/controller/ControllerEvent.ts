@@ -9,8 +9,8 @@ export class ControllerEvent {
 
     async create(req: Request, res: Response): Promise<Response> {
         try {
-            const { nome, email, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, comissaoId } = req.body;
-            const newEvent = new Event({ email, nome, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, createdAt: new Date(), comissaoId });
+            const { nomeEvento, emailEvento, assuntoPrincipal, descricao, tipo, local, cep, horarioInicio, horarioFim, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, comissaoId } = req.body;
+            const newEvent = new Event({ emailEvento, nomeEvento, assuntoPrincipal, descricao, tipo, local, cep, horarioInicio, horarioFim, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, createdAt: new Date(), comissaoId });
 
             const userCreated = await this.executerEvent.create(newEvent);
             return res.status(200).json({ message: "event created sussessfully", userCreated });
@@ -43,8 +43,8 @@ export class ControllerEvent {
 
     async update(req: Request, res: Response): Promise<Response> {
         try {
-            const { nome, email, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, comissaoId } = req.body;
-            const event = new Event({ email, nome, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, createdAt: new Date(), comissaoId }, req.params.id);
+            const { nomeEvento, emailEvento, assuntoPrincipal, descricao, tipo, local, cep, horarioInicio, horarioFim, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, comissaoId } = req.body;
+            const event = new Event({ emailEvento, nomeEvento, assuntoPrincipal, descricao, tipo, local, cep, horarioInicio, horarioFim, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, createdAt: new Date(), comissaoId }, req.params.id);
 
             const eventUpdated = await this.executerEvent.update(event);
             return res.status(200).json({ message: "event uptaded sussessfully", eventUpdated })
