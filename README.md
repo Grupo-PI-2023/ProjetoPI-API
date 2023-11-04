@@ -1,41 +1,17 @@
-# Memorize Studio - API
+# Projeto PI Fast Eventech - API
 
 ![badge about status](https://img.shields.io/badge/status-on%20progress-blue)
 ![badge about version](https://img.shields.io/badge/version-1.1-yellow)
 
-> <p>API do Projeto Memorize Studio, baseado no padrão MVC (sem Views), utilizado: TypeScript, Node JS, Jest para testes e como ORM Node: Prisma usando MySQL para banco <br> O projeto Memorize visa ajudar estudantes com défice de aprendizagem a memorizar conteúdos didáticos atraves de posts, com o intuito de viabilizar socialização como uma rede social </p>
-> <p>Memorize Studio Project API, based on the MVC pattern (without Views), used: TypeScript, Node JS, Jest for testing and as ORM Node: Prisma using MySQL for database <br> The Memorize project helps students with learning difficulties to memorize didactic content through posts, in order to enable socialization as a social network </p>
+> <p>API do Projeto do projeto intergrador da fatec, baseado no padrão MVC (sem Views), utilizado: TypeScript, Node JS, Jest para testes e como ORM Node: Prisma usando MySQL para banco <br> O projeto Fast Eventec é um site de gerenciamento de eventos, artigos e apresentações </p>
 
 <br>
 
  **Funcionalidade**
  
-> * _Adicionar likes ao post é um comando para revisa-lo_
- 
-> * _Há interação entre usuários por comentarios em posts_
- 
-> * _Há também interação entre usuários por Chat de conversa_
- 
-> * _Conta com um Chat integrado com IA para auxiliar em dúvidas didáticas_
- 
-**Funcionality**
-
-> * _Adding likes to the post is a command to review it_
-
-> * _There is interaction between users by commenting on posts_
-
-> * _There is also interaction between users via Chat_
-
-> * _Has an integrated AI chat to help with didactic doubts_
-
 
 ## Como a API funciona - How the API works
 <section>
- 
-**Estrutura - Structure**
-<p> Basicamente existe um CRUD para as seguintes entidades: <br> Basically there is a CRUD for the following entities: <br> User <br> Profile <br> Post <br> Review </p>
-<p> As relações entre as entidades estão expressas no esquema do prisma <br> The relation between entities are on the prisma schema </p>
-<p> As rotas estão no diretório de rotas no servidor <br> The routes are available on the server directory</p>
 
 **Rode - Run**
   
@@ -44,8 +20,6 @@ CLI - `npm run start`
 **Teste - Test**
   
 CLI - `npm run test`
-
-</section>
 
 ## Setup para db:
 <p> crie um .env seguindo o modelo deixado no env-example.env </p>
@@ -65,6 +39,8 @@ RUN - `npx prisma generate`
 
 ## Veja mais sobre relacionamentos e multiplicidade no schema do prisma aqui:
 [Documentacao](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
+
+</section>
 
 ## Contrubua para o projeto usando commits semanticos:
 
