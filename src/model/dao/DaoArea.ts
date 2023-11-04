@@ -1,20 +1,18 @@
-import { ICrudEvent } from "../../interfaces/ICrudEvent";
-import { Event } from "../bean/Event";
-
-
+import { ICrudArea } from "../../interfaces/ICrudArea";
+import { Area } from "../bean/Area";
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export class DaoEvent implements ICrudEvent {
+export class DaoArea implements ICrudArea {
 
-    async create(event: Event): Promise<Event> {
-        let newUser: Event = new Event(event);
+    async create(area: Area): Promise<Area> {
+        let newUser: Area = new Area(area);
 
-        await prisma.event.create({
-            data: event
-        }).then(async (event) => {
-            newUser = event;
+        await prisma.area.create({
+            data: area
+        }).then(async (area) => {
+            newUser = area;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)
@@ -25,10 +23,10 @@ export class DaoEvent implements ICrudEvent {
         return newUser;
     }
 
-    async read(): Promise<Event[]> {
-        let users: Event[] = [];
+    async read(): Promise<Area[]> {
+        let users: Area[] = [];
 
-        await prisma.event.findMany().then(async (result : any) => {
+        await prisma.area.findMany().then(async (result) => {
             users = result;
             await prisma.$disconnect();
         }).catch(async (e) => {
@@ -40,15 +38,15 @@ export class DaoEvent implements ICrudEvent {
         return users;
     }
 
-    async readEvent(id: string): Promise<Event | null> {
-        let userReturned: Event | null = null;
+    async readArea(id: string): Promise<Area | null> {
+        let userReturned: Area | null = null;
 
-        await prisma.event.findUnique({
+        await prisma.area.findUnique({
             where: {
                 id: id
             }
-        }).then(async (event) => {
-            userReturned = event;
+        }).then(async (area) => {
+            userReturned = area;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)
@@ -59,14 +57,14 @@ export class DaoEvent implements ICrudEvent {
         return userReturned;
     }
 
-    async update(event: Event): Promise<Event> {
-        let userUpdated: Event = new Event(event);
+    async update(area: Area): Promise<Area> {
+        let userUpdated: Area = new Area(area);
 
-        await prisma.event.update({
+        await prisma.area.update({
             where: {
-                id: event.id
+                id: area.id
             },
-            data: event
+            data: area
         }).then(async () => {
             await prisma.$disconnect()
         }).catch(async (e) => {
@@ -78,15 +76,14 @@ export class DaoEvent implements ICrudEvent {
         return userUpdated;
     }
 
-    async delete(id: string): Promise<Event> {
-        let userDeleted: Event = new Event({ email: "", nome: "", assuntoPrincipal: "", descricao: "", tipo: "", local: "", dataInicio: new Date(), dataFinal: new Date(), privado: false, anais: false, certificados: false, logo: "", periodo: "", createdAt: new Date(), comissaoId: "" });
-
-        await prisma.event.delete({
+    async delete(id: string): Promise<Area> {
+        let userDeleted = new Area({ nome: "", eventoId: "" });
+        await prisma.area.delete({
             where: {
                 id
             }
-        }).then(async (event) => {
-            userDeleted = event;
+        }).then(async (area) => {
+            userDeleted = area;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)

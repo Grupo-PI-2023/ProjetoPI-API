@@ -1,30 +1,31 @@
 import { Request, Response } from "express";
-import { ExecuterUser } from "../executors/ExecuterUser";
 import { Event } from "../model/bean/Event";
+import { ExecuterEvent } from "../executors/ExecuterEvent";
 
 export class ControllerEvent {
     constructor(
-        private executerUser: ExecuterUser
+        private executerEvent: ExecuterEvent
     ) { }
 
     async create(req: Request, res: Response): Promise<Response> {
         try {
-            const { name, email } = req.body;
-            const newUser = new Event({ name, email });
-            const userCreated = await this.executerUser.create(newUser);
-            return res.status(200).json({ message: "user created sussessfully", userCreated });
+            const { nome, email, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, comissaoId } = req.body;
+            const newEvent = new Event({ email, nome, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, createdAt: new Date(), comissaoId });
+
+            const userCreated = await this.executerEvent.create(newEvent);
+            return res.status(200).json({ message: "event created sussessfully", userCreated });
         } catch (error) {
             return res.status(204).json(error)
         }
     }
 
-    async readUser(req: Request, res: Response): Promise<Response> {
+    async readEvent(req: Request, res: Response): Promise<Response> {
         try {
-            const user = await this.executerUser.readUser(req.params.id);
-            if (user) {
-                return res.status(200).json({ message: "user founded", user })
+            const event = await this.executerEvent.readEvent(req.params.id);
+            if (event) {
+                return res.status(200).json({ message: "event founded", event })
             } else {
-                return res.status(204).json({ message: "user does not exists" })
+                return res.status(204).json({ message: "event does not exists" })
             }
         } catch (error) {
             return res.json(error)
@@ -33,8 +34,8 @@ export class ControllerEvent {
 
     async read(req: Request, res: Response): Promise<Response> {
         try {
-            const users = await this.executerUser.read();
-            return res.status(200).json({ message: "users", users })
+            const events = await this.executerEvent.read();
+            return res.status(200).json({ message: "events", events })
         } catch (error) {
             return res.json(error)
         }
@@ -42,10 +43,11 @@ export class ControllerEvent {
 
     async update(req: Request, res: Response): Promise<Response> {
         try {
-            const { id, name, email } = req.body;
-            const user = new Event({ name, email }, id)
-            const userUpdated = await this.executerUser.update(user);
-            return res.status(200).json({ message: "user uptaded sussessfully", userUpdated })
+            const { nome, email, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, comissaoId } = req.body;
+            const event = new Event({ email, nome, assuntoPrincipal, descricao, tipo, local, dataInicio, dataFinal, privado, anais, certificados, logo, periodo, createdAt: new Date(), comissaoId }, req.params.id);
+
+            const eventUpdated = await this.executerEvent.update(event);
+            return res.status(200).json({ message: "event uptaded sussessfully", eventUpdated })
         } catch (error) {
             return res.json(error)
         }
@@ -53,8 +55,8 @@ export class ControllerEvent {
 
     async delete(req: Request, res: Response): Promise<Response> {
         try {
-            const user = await this.executerUser.delete(req.params.id);
-            return res.status(200).json({ message: "user deleted", user })
+            const event = await this.executerEvent.delete(req.params.id);
+            return res.status(200).json({ message: "event deleted", event })
         } catch (error) {
             return res.json(error)
         }

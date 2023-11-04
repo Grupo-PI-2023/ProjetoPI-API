@@ -1,20 +1,18 @@
-import { ICrudEvent } from "../../interfaces/ICrudEvent";
-import { Event } from "../bean/Event";
-
-
+import { ICrudComissao } from "../../interfaces/ICrudComissao";
+import { Comissao } from "../bean/Comissao";
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export class DaoEvent implements ICrudEvent {
+export class DaoComissao implements ICrudComissao {
 
-    async create(event: Event): Promise<Event> {
-        let newUser: Event = new Event(event);
+    async create(comissao: Comissao): Promise<Comissao> {
+        let newUser: Comissao = new Comissao(comissao);
 
-        await prisma.event.create({
-            data: event
-        }).then(async (event) => {
-            newUser = event;
+        await prisma.comissao.create({
+            data: comissao
+        }).then(async (comissao) => {
+            newUser = comissao;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)
@@ -25,10 +23,10 @@ export class DaoEvent implements ICrudEvent {
         return newUser;
     }
 
-    async read(): Promise<Event[]> {
-        let users: Event[] = [];
+    async read(): Promise<Comissao[]> {
+        let users: Comissao[] = [];
 
-        await prisma.event.findMany().then(async (result : any) => {
+        await prisma.comissao.findMany().then(async (result) => {
             users = result;
             await prisma.$disconnect();
         }).catch(async (e) => {
@@ -40,15 +38,15 @@ export class DaoEvent implements ICrudEvent {
         return users;
     }
 
-    async readEvent(id: string): Promise<Event | null> {
-        let userReturned: Event | null = null;
+    async readComissao(id: string): Promise<Comissao | null> {
+        let userReturned: Comissao | null = null;
 
-        await prisma.event.findUnique({
+        await prisma.comissao.findUnique({
             where: {
                 id: id
             }
-        }).then(async (event) => {
-            userReturned = event;
+        }).then(async (comissao) => {
+            userReturned = comissao;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)
@@ -59,14 +57,14 @@ export class DaoEvent implements ICrudEvent {
         return userReturned;
     }
 
-    async update(event: Event): Promise<Event> {
-        let userUpdated: Event = new Event(event);
+    async update(comissao: Comissao): Promise<Comissao> {
+        let userUpdated: Comissao = new Comissao(comissao);
 
-        await prisma.event.update({
+        await prisma.comissao.update({
             where: {
-                id: event.id
+                id: comissao.id
             },
-            data: event
+            data: comissao
         }).then(async () => {
             await prisma.$disconnect()
         }).catch(async (e) => {
@@ -78,15 +76,15 @@ export class DaoEvent implements ICrudEvent {
         return userUpdated;
     }
 
-    async delete(id: string): Promise<Event> {
-        let userDeleted: Event = new Event({ email: "", nome: "", assuntoPrincipal: "", descricao: "", tipo: "", local: "", dataInicio: new Date(), dataFinal: new Date(), privado: false, anais: false, certificados: false, logo: "", periodo: "", createdAt: new Date(), comissaoId: "" });
+    async delete(id: string): Promise<Comissao> {
+        let userDeleted = new Comissao({ email: "", name: "", cpf: "", instituicao: "", turno: "", lattes: "", senha: "", adm: false, organizador: false, avaliador: false, chair: false });
 
-        await prisma.event.delete({
+        await prisma.comissao.delete({
             where: {
                 id
             }
-        }).then(async (event) => {
-            userDeleted = event;
+        }).then(async (comissao) => {
+            userDeleted = comissao;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)

@@ -1,13 +1,13 @@
 
 // import { createUserRoute, deleteUserRoute, readUserRoute, readUsersRoute, updateUserRoute } from "./routes";
-const { userRouter } = require('./routes');
+const { routes } = require('./routes');
 const express = require('express');
 
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', userRouter);
+app.use('/', routes);
 // app.use(createUserRoute, deleteUserRoute, readUserRoute, readUsersRoute, updateUserRoute);
 
 app.listen(5002, () => {

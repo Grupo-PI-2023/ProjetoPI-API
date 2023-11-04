@@ -47,8 +47,26 @@ CLI - `npm run test`
 
 </section>
 
+## Setup para db:
+<p> crie um .env seguindo o modelo deixado no env-example.env </p>
 
-## Contrubua para o projeto:
+<p> pode adicionar sua propria url de banco ou rodar um db com o docker compose basta atualizar a url </p>
+
+RUN - `docker compose up`
+
+**pode enviar o schema para seu banco sem criar uma migration**
+RUN = `npx prisma db push`
+
+**OU Atualize com as migrations para ter o versionamento do banco**
+RUN - `npx prisma migrate dev --name describe_changes_made`
+
+## IMPORTANRE Atualize sempre o PrismaClient sempre que mudar o schema:
+RUN - `npx prisma generate`
+
+## Veja mais sobre relacionamentos e multiplicidade no schema do prisma aqui:
+[Documentacao](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
+
+## Contrubua para o projeto usando commits semanticos:
 
 > ```
 > tag: descrição

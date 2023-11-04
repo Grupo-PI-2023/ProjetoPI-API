@@ -10,29 +10,75 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Post {
-//   id        Int      @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   title     String   @db.VarChar(255)
-//   content   String?
-//   published Boolean  @default(false)
-//   author    User     @relation(fields: [authorId], references: [id])
-//   authorId  Int
+model Comissao {
+  id               String   @id
+  name             String
+  email            String   @unique
+  senha            String
+  cpf              String
+  instituicao      String
+  certificado      String?
+  turno            String
+  lattes           String
+  adm              Boolean?
+  organizador      Boolean?
+  avaliador        Boolean?
+  chair            Boolean?
+  areaConhecimento Area[]
+  Event            Event?
+}
+
+model Area {
+  id         String    @id
+  nome       String
+  evento     Event     @relation(fields: [eventoId], references: [id])
+  Comissao   Comissao? @relation(fields: [comissaoId], references: [id])
+  comissaoId String?
+  eventoId    String
+}
+
+model Aluno {
+  id           String   @id
+  name         String
+  email        String   @unique
+  senha        String
+  cpf          String
+  instituicao  String
+  certificado  String?
+  periodo      String
+  curso        String
+  autor        Boolean
+  apresentador Boolean?
+  presenca     Boolean?
+}
+
+model Event {
+  id               String   @id
+  nome             String
+  descricao        String
+  email            String
+  tipo             String
+  assuntoPrincipal String
+  local            String
+  dataInicio       DateTime
+  dataFinal        DateTime
+  privado          Boolean
+  anais            Boolean
+  certificados     Boolean
+  logo             String?
+  periodo          String
+  createdAt        DateTime @default(now())
+  comissao         Comissao @relation(fields: [comissaoId], references: [id])
+  comissaoId       String   @unique
+  Area             Area[]
+}
+
+// model User {
+//   id          String  @id
+//   name        String
+//   email       String  @unique
+//   senha       String
+//   cpf         String
+//   instituicao String
+//   certificado String?
 // }
-
-model Profile {
-  id       String  @id
-  bio      String?
-  photoUrl String?
-  user     User    @relation(fields: [userId], references: [id])
-  userId   String  @unique
-}
-
-model User {
-  id      String   @id
-  email   String   @unique
-  name    String
-  profile Profile?
-  // posts   Post[]
-}
