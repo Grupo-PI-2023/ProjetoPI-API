@@ -3,14 +3,17 @@ import { uuid } from "uuidv4";
 export class Event {
 
     public readonly id: string;
-    public email: string;
-    public nome: string;
+    public emailEvento: string;
+    public nomeEvento: string;
     public descricao: string;
     public tipo: string;
     public assuntoPrincipal: string;
     public local: string;
-    public dataInicio: Date;
-    public dataFinal: Date;
+    public cep: string;
+    public horarioInicio: string;
+    public horarioFim: string;
+    public dataInicio?: Date | null;
+    public dataFinal?: Date | null;
     public privado: boolean;
     public anais: boolean;
     public certificados: boolean;
@@ -21,12 +24,15 @@ export class Event {
 
     // constructor(props: Event) {
     constructor(props: Omit<Event, 'id'>, id?: string) {
-        this.email = props.email;
-        this.nome = props.nome;
+        this.emailEvento = props.emailEvento;
+        this.nomeEvento = props.nomeEvento;
         this.descricao = props.descricao;
         this.tipo = props.tipo;
         this.assuntoPrincipal = props.assuntoPrincipal;
         this.local = props.local;
+        this.cep = props.cep;
+        this.horarioInicio = props.horarioInicio;
+        this.horarioFim = props.horarioFim;
         this.dataInicio = props.dataInicio;
         this.dataFinal = props.dataFinal;
         this.privado = props.privado;
