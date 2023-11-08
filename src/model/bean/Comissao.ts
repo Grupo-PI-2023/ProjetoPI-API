@@ -15,12 +15,6 @@ export class Comissao extends User {
     // constructor(props: Comissao) {
     constructor(props: Omit<Comissao, 'id'>, id?: string) {
         super(props);
-        this.name = props.name;
-        this.email = props.email;
-        this.senha = props.senha;
-        this.cpf = props.cpf;
-        this.instituicao = props.instituicao;
-        this.certificado = props.certificado;
         this.turno = props.turno;
         this.lattes = props.lattes;
         this.adm = props.adm;
