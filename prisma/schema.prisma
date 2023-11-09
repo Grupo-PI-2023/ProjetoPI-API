@@ -63,8 +63,8 @@ model Event {
   cep              String
   horarioInicio    String
   horarioFim       String
-  dataInicio       DateTime?
-  dataFinal        DateTime?
+  dataInicio       String?
+  dataFinal        String?
   privado          Boolean
   anais            Boolean
   certificados     Boolean

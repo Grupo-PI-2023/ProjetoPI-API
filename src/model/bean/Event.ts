@@ -12,15 +12,15 @@ export class Event {
     public cep: string;
     public horarioInicio: string;
     public horarioFim: string;
-    public dataInicio?: Date | null;
-    public dataFinal?: Date | null;
+    public dataInicio?: string | null;
+    public dataFinal?: string | null;
     public privado: boolean;
     public anais: boolean;
     public certificados: boolean;
     public logo?: string | null;
     public periodo: string;
     public createdAt: Date;    
-    public comissaoId: string;
+    public comissaoId: string; 
 
     // constructor(props: Event) {
     constructor(props: Omit<Event, 'id'>, id?: string) {
@@ -42,7 +42,6 @@ export class Event {
         this.periodo = props.periodo;
         this.createdAt = props.createdAt;
         this.comissaoId = props.comissaoId;
-
         if (id) {
             this.id = id
         } else {

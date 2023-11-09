@@ -24,7 +24,7 @@ export class DaoEvent implements ICrudEvent {
 
         return newUser;
     }
-
+    
     async read(): Promise<Event[]> {
         let users: Event[] = [];
 
@@ -79,7 +79,7 @@ export class DaoEvent implements ICrudEvent {
     }
 
     async delete(id: string): Promise<Event> {
-        let userDeleted: Event = new Event({ emailEvento: "", nomeEvento: "", assuntoPrincipal: "", descricao: "", tipo: "", local: "",cep: "", horarioInicio: "", horarioFim: "", dataInicio: new Date(), dataFinal: new Date(), privado: false, anais: false, certificados: false, logo: "", periodo: "", createdAt: new Date(), comissaoId: "" });
+        let userDeleted: Event = new Event({ emailEvento: "", nomeEvento: "", assuntoPrincipal: "", descricao: "", tipo: "", local: "",cep: "", horarioInicio: "", horarioFim: "", dataInicio: "", dataFinal: "", privado: false, anais: false, certificados: false, logo: "", periodo: "", createdAt: new Date(), comissaoId: "" });
 
         await prisma.event.delete({
             where: {
