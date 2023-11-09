@@ -79,7 +79,7 @@ export class DaoSala implements ICrudSala {
     }
 
     async delete(id: string): Promise<Sala> {
-        let userDeleted: Sala = new Sala({ andar: 0, tipo: "", numero: 0, limitePessoas: 0, temaSala: "" });
+        let userDeleted: Sala = new Sala({ andar: 0, tipo: "", numero: 0, limitePessoas: 0, temaSala: "" , eventId: ""});
 
         await prisma.sala.delete({
             where: {

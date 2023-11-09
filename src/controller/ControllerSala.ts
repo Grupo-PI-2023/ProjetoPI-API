@@ -9,8 +9,8 @@ export class ControllerSala {
 
     async create(req: Request, res: Response): Promise<Response> {
         try {
-            const { andar, tipo, numero, limitePessoas, temaSala } = req.body;
-            const newSala = new Sala({ andar, tipo, numero, limitePessoas, temaSala });
+            const { andar, tipo, numero, limitePessoas, temaSala, eventId } = req.body;
+            const newSala = new Sala({ andar, tipo, numero, limitePessoas, temaSala, eventId });
 
             const userCreated = await this.executerSala.create(newSala);
             return res.status(200).json({ message: "sala created sussessfully", userCreated });
@@ -43,8 +43,8 @@ export class ControllerSala {
 
     async update(req: Request, res: Response): Promise<Response> {
         try {
-            const { andar, tipo, numero, limitePessoas, temaSala } = req.body;
-            const sala = new Sala({ andar, tipo, numero, limitePessoas, temaSala }, req.params.id);
+            const { andar, tipo, numero, limitePessoas, temaSala, eventId } = req.body;
+            const sala = new Sala({ andar, tipo, numero, limitePessoas, temaSala, eventId }, req.params.id);
 
             const salaUpdated = await this.executerSala.update(sala);
             return res.status(200).json({ message: "sala uptaded sussessfully", salaUpdated })

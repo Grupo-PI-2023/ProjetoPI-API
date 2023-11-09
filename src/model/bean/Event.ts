@@ -12,8 +12,8 @@ export class Event {
     public cep: string;
     public horarioInicio: string;
     public horarioFim: string;
-    public dataInicio?: Date | null;
-    public dataFinal?: Date | null;
+    public dataInicio?: string | null;
+    public dataFinal?: string | null;
     public privado: boolean;
     public anais: boolean;
     public certificados: boolean;

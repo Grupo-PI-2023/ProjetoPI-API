@@ -7,6 +7,7 @@ export class Sala {
     public numero: number;
     public limitePessoas: number;
     public temaSala: string;
+    public eventId: string;
     
     //constructor(props: Sala) {
     constructor(props: Omit<Sala, 'id'>, id?: string) {
@@ -15,6 +16,7 @@ export class Sala {
         this.numero = props.numero;
         this.limitePessoas = props.limitePessoas;
         this.temaSala = props.temaSala;
+        this.eventId = props.eventId;
         // this.id = props.id
 
         if (id) {

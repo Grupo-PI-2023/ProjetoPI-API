@@ -65,8 +65,8 @@ model Event {
   cep              String
   horarioInicio    String
   horarioFim       String
-  dataInicio       DateTime?
-  dataFinal        DateTime?
+  dataInicio       String?
+  dataFinal        String?
   privado          Boolean
   anais            Boolean
   certificados     Boolean
@@ -76,16 +76,19 @@ model Event {
   comissao         Comissao @relation(fields: [comissaoId], references: [id])
   comissaoId       String   @unique
   Area             Area[]
+  Sala             Sala?
 }
 
 model Sala{
-  id               String   @id
-  andar            Int
-  tipo             String
-  numero           Int      @unique
-  limitePessoas    Int
-  temaSala         String
-  Sessao           Sessao?
+  id                String   @id
+  andar             Int
+  tipo              String
+  numero            Int      @unique
+  limitePessoas     Int
+  temaSala          String
+  Sessao            Sessao?
+  event             Event @relation(fields: [eventId], references: [id])
+  eventId           String @unique
 }
 
 model Sessao {
@@ -98,6 +101,7 @@ model Sessao {
   horario           Int
   comissao          Comissao @relation(fields: [comissaoId], references: [id])
   comissaoId        String   @unique
+
 }
 
 // model User {
