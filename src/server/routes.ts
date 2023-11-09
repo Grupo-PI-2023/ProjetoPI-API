@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { contComissao, contEvent, contAluno, contArea, contSala } from "../executors";
+import { contComissao, contEvent, contAluno, contArea, contSala, contSessao } from "../executors";
 
 const routes = Router();
 
@@ -136,6 +136,33 @@ routes.put("/update-sala/:id", (req, res) => {
 routes.delete("/delete-sala/:id", (req, res) => {
     contSala.delete(req, res).then((contSala) => {
         return contSala
+    })
+})
+
+// SESSAO ROUTES
+routes.post("/create-sessao", (req, res) => {
+    contSessao.create(req, res).then((contSessao) => {
+        return contSessao
+    })
+})
+routes.get("/read-sessaos", (req, res) => {
+    contSessao.read(req, res).then((contSessao) => {
+        return contSessao
+    })
+})
+routes.get("/read-sessao/:id", (req, res) => {
+    contSessao.readSessao(req, res).then((contSessao) => {
+        return contSessao
+    })
+})
+routes.put("/update-sessao/:id", (req, res) => {
+    contSessao.update(req, res).then((contSessao) => {
+        return contSessao
+    })
+})
+routes.delete("/delete-sessao/:id", (req, res) => {
+    contSessao.delete(req, res).then((contSessao) => {
+        return contSessao
     })
 })
 
