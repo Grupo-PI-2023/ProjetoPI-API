@@ -1,10 +1,11 @@
-import { ControllerComissao, ControllerArea, ControllerAluno, ControllerEvent, ControllerSala } from "../controller/";
-import { DaoEvent, DaoAluno, DaoArea, DaoComissao, DaoSala } from "../model/dao/";
+import { ControllerComissao, ControllerArea, ControllerAluno, ControllerEvent, ControllerSala, ControllerSessao } from "../controller/";
+import { DaoEvent, DaoAluno, DaoArea, DaoComissao, DaoSala, DaoSessao } from "../model/dao/";
 import { ExecuterEvent } from "./ExecuterEvent";
 import { ExecuterComissao } from "./ExecuterComissao";
 import { ExecuterAluno } from "./ExecuterAluno";
 import { ExecuterArea } from "./ExecuterArea";
 import { ExecuterSala } from "./ExecuterSala";
+import { ExecuterSessao } from "./ExecuterSessao";
 // import { ExecuterUser } from "./ExecuterUser";
 
 const de = new DaoEvent()
@@ -27,7 +28,11 @@ const ds = new DaoSala()
 const es = new ExecuterSala(ds)
 const contSala = new ControllerSala(es)
 
-export { contEvent, contComissao, contAluno, contArea, contSala };
+const dss = new DaoSessao()
+const ess = new ExecuterSessao(dss)
+const contSessao = new ControllerSessao(ess)
+
+export { contEvent, contComissao, contAluno, contArea, contSala, contSessao };
 
 // executer for USER
 // const du = new DaoUser();

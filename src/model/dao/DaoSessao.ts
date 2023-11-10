@@ -1,20 +1,20 @@
-import { ICrudSala } from "../../interfaces/ICrudSala";
-import { Sala } from "../bean/Sala";
+import { ICrudSessao } from "../../interfaces/ICrudSessao";
+import { Sessao } from "../bean/Sessao";
 
 
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export class DaoSala implements ICrudSala {
+export class DaoSessao implements ICrudSessao {
 
-    async create(sala: Sala): Promise<Sala> {
-        let newUser: Sala = new Sala(sala);
+    async create(sessao: Sessao): Promise<Sessao> {
+        let newUser: Sessao = new Sessao(sessao);
 
-        await prisma.sala.create({
-            data: sala
-        }).then(async (Sala) => {
-            newUser = Sala;
+        await prisma.sessao.create({
+            data: sessao
+        }).then(async (sessao) => {
+            newUser = sessao;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)
@@ -25,10 +25,10 @@ export class DaoSala implements ICrudSala {
         return newUser;
     }
 
-    async read(): Promise<Sala[]> {
-        let users: Sala[] = [];
+    async read(): Promise<Sessao[]> {
+        let users: Sessao[] = [];
 
-        await prisma.sala.findMany().then(async (result : any) => {
+        await prisma.sessao.findMany().then(async (result : any) => {
             users = result;
             await prisma.$disconnect();
         }).catch(async (e) => {
@@ -40,15 +40,15 @@ export class DaoSala implements ICrudSala {
         return users;
     }
 
-    async readSala(id: string): Promise<Sala | null> {
-        let userReturned: Sala | null = null;
+    async readSessao(id: string): Promise<Sessao | null> {
+        let userReturned: Sessao | null = null;
 
-        await prisma.sala.findUnique({
+        await prisma.sessao.findUnique({
             where: {
                 id: id
             }
-        }).then(async (Sala) => {
-            userReturned = Sala;
+        }).then(async (sessao) => {
+            userReturned = sessao;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)
@@ -59,14 +59,14 @@ export class DaoSala implements ICrudSala {
         return userReturned;
     }
 
-    async update(sala: Sala): Promise<Sala> {
-        let userUpdated: Sala = new Sala(sala);
+    async update(sessao: Sessao): Promise<Sessao> {
+        let userUpdated: Sessao = new Sessao(sessao);
 
-        await prisma.sala.update({
+        await prisma.sessao.update({
             where: {
-                id: sala.id
+                id: sessao.id
             },
-            data: sala
+            data: sessao
         }).then(async () => {
             await prisma.$disconnect()
         }).catch(async (e) => {
@@ -78,15 +78,15 @@ export class DaoSala implements ICrudSala {
         return userUpdated;
     }
 
-    async delete(id: string): Promise<Sala> {
-        let userDeleted: Sala = new Sala({ andar: 0, tipo: "", numero: 0, limitePessoas: 0, temaSala: "" , eventId: ""});
+    async delete(id: string): Promise<Sessao> {
+        let userDeleted: Sessao = new Sessao({ tempoSessao: 0, tempoApresentacao: 0, anfiteatro: false, salaId: "", horario: 0, comissaoId: "" });
 
-        await prisma.sala.delete({
+        await prisma.sessao.delete({
             where: {
                 id
             }
-        }).then(async (Sala) => {
-            userDeleted = Sala;
+        }).then(async (sessao) => {
+            userDeleted = sessao;
             await prisma.$disconnect()
         }).catch(async (e) => {
             console.error(e)

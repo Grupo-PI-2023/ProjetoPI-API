@@ -26,6 +26,8 @@ model Comissao {
   chair            Boolean?
   areaConhecimento Area[]
   Event            Event?
+  Sessao           Sessao?
+
 }
 
 model Area {
@@ -74,15 +76,32 @@ model Event {
   comissao         Comissao @relation(fields: [comissaoId], references: [id])
   comissaoId       String   @unique
   Area             Area[]
+  Sala             Sala?
 }
 
 model Sala{
-  id               String   @id
-  andar            Int
-  tipo             String
-  numero           Int      @unique
-  limitePessoas    Int
-  temaSala         String
+  id                String   @id
+  andar             Int
+  tipo              String
+  numero            Int      @unique
+  limitePessoas     Int
+  temaSala          String
+  Sessao            Sessao?
+  event             Event @relation(fields: [eventId], references: [id])
+  eventId           String @unique
+}
+
+model Sessao {
+  id                String   @id
+  tempoSessao       Int
+  tempoApresentacao Int
+  anfiteatro        Boolean?
+  sala              Sala @relation(fields: [salaId], references: [id])
+  salaId            String @unique
+  horario           Int
+  comissao          Comissao @relation(fields: [comissaoId], references: [id])
+  comissaoId        String   @unique
+
 }
 
 // model User {
