@@ -105,6 +105,16 @@ routes.get("/area/:id", (req, res) => {
         return contArea
     })
 })
+routes.get("/area-event/:id", (req, res) => {
+    contArea.rearAreasByEvent(req, res).then((contArea) => {
+        return contArea
+    })
+})
+routes.put("/areas", (req, res) => {
+    contArea.updateMany(req, res).then((contArea) => {
+        return contArea
+    })
+})
 routes.put("/area/:id", (req, res) => {
     contArea.update(req, res).then((contArea) => {
         return contArea

@@ -33,8 +33,26 @@ export class ControllerArea {
 
     async read(req: Request, res: Response): Promise<Response> {
         try {
-            const comissoes = await this.executerArea.read();
-            return res.status(200).json({ message: "comissoes", comissoes })
+            const areas = await this.executerArea.read();
+            return res.status(200).json({ message: "areas", areas })
+        } catch (error) {
+            return res.json(error)
+        }
+    }
+
+    async rearAreasByEvent(req: Request, res: Response): Promise<Response> {
+        try {
+            const areas = await this.executerArea.rearAreasByEvent(req.params.id);
+            return res.status(200).json({ message: "areas", areas })
+        } catch (error) {
+            return res.json(error)
+        }
+    }
+    async updateMany(req: Request, res: Response): Promise<Response> {
+        try {
+            const {eventoId, comissaoId } = req.body;
+            const areas = await this.executerArea.updateMany(eventoId, comissaoId);
+            return res.status(200).json({ message: "areas uptaded", areas })
         } catch (error) {
             return res.json(error)
         }
