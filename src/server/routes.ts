@@ -51,6 +51,12 @@ routes.get("/comissao/:id", (req, res) => {
         return contComissao
     })
 })
+routes.get("/comissao?adm=true", (req, res) => {
+    // req.query
+    contComissao.readComissao(req, res).then((contComissao) => {
+        return contComissao
+    })
+})
 routes.put("/comissao/:id", (req, res) => {
     contComissao.update(req, res).then((contComissao) => {
         return contComissao
@@ -106,15 +112,11 @@ routes.get("/area/:id", (req, res) => {
     })
 })
 routes.get("/area-event/:id", (req, res) => {
-    contArea.rearAreasByEvent(req, res).then((contArea) => {
+    contArea.readAreasByEvent(req, res).then((contArea) => {
         return contArea
     })
 })
-routes.put("/areas", (req, res) => {
-    contArea.updateMany(req, res).then((contArea) => {
-        return contArea
-    })
-})
+
 routes.put("/area/:id", (req, res) => {
     contArea.update(req, res).then((contArea) => {
         return contArea
@@ -127,54 +129,54 @@ routes.delete("/area/:id", (req, res) => {
 })
 
 // SALA ROUTES
-routes.post("/create-sala", (req, res) => {
+routes.post("/sala", (req, res) => {
     contSala.create(req, res).then((contSala) => {
         return contSala
     })
 })
-routes.get("/read-salas", (req, res) => {
+routes.get("/salas", (req, res) => {
     contSala.read(req, res).then((contSala) => {
         return contSala
     })
 })
-routes.get("/read-sala/:id", (req, res) => {
+routes.get("/sala/:id", (req, res) => {
     contSala.readSala(req, res).then((contSala) => {
         return contSala
     })
 })
-routes.put("/update-sala/:id", (req, res) => {
+routes.put("/sala/:id", (req, res) => {
     contSala.update(req, res).then((contSala) => {
         return contSala
     })
 })
-routes.delete("/delete-sala/:id", (req, res) => {
+routes.delete("/sala/:id", (req, res) => {
     contSala.delete(req, res).then((contSala) => {
         return contSala
     })
 })
 
 // SESSAO ROUTES
-routes.post("/create-sessao", (req, res) => {
+routes.post("/sessao", (req, res) => {
     contSessao.create(req, res).then((contSessao) => {
         return contSessao
     })
 })
-routes.get("/read-sessaos", (req, res) => {
+routes.get("/sessaos", (req, res) => {
     contSessao.read(req, res).then((contSessao) => {
         return contSessao
     })
 })
-routes.get("/read-sessao/:id", (req, res) => {
+routes.get("/sessao/:id", (req, res) => {
     contSessao.readSessao(req, res).then((contSessao) => {
         return contSessao
     })
 })
-routes.put("/update-sessao/:id", (req, res) => {
+routes.put("/sessao/:id", (req, res) => {
     contSessao.update(req, res).then((contSessao) => {
         return contSessao
     })
 })
-routes.delete("/delete-sessao/:id", (req, res) => {
+routes.delete("/sessao/:id", (req, res) => {
     contSessao.delete(req, res).then((contSessao) => {
         return contSessao
     })
@@ -197,7 +199,7 @@ module.exports = { routes }
 //         return contUser
 //     })
 // })
-// userRouter.get("/read-user/:id", (req, res) => {
+// userRouter.get("/user/:id", (req, res) => {
 //     contUser.readUser(req, res).then((contUser) => {
 //         return contUser
 //     })

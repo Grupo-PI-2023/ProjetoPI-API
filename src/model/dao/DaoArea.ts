@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export class DaoArea implements ICrudArea {
-    async rearAreasByEvent(id: string): Promise<Area[]> {
+    async readAreasByEvent(id: string): Promise<Area[]> {
         let area: Area[] = []
         await prisma.area.findMany({
             where: {
@@ -13,26 +13,6 @@ export class DaoArea implements ICrudArea {
             }
         }).then(async (result) => {
             area = result;
-            await prisma.$disconnect();
-        }).catch(async (e) => {
-            console.error(e);
-            await prisma.$disconnect();
-            process.exit(1);
-        })
-        return area;
-    }
-
-    async updateMany(idEvent: string, idComissao: string): Promise<number>{
-        let area: number = 0;
-        await prisma.area.updateMany({
-            data: {
-                comissaoId: idComissao
-            },
-            where: {
-                eventoId: idEvent
-            }
-        }).then(async (result) => {
-            area = result.count;
             await prisma.$disconnect();
         }).catch(async (e) => {
             console.error(e);

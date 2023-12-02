@@ -1,5 +1,6 @@
 import { uuid } from "uuidv4";
 import { User } from "./User";
+import { Area } from "./Area";
 
 export class Comissao extends User {
 // export class Comissao {
@@ -11,6 +12,7 @@ export class Comissao extends User {
     public organizador: boolean | null ;
     public avaliador: boolean | null ;
     public chair: boolean | null ;
+    // public areas: Area[];
 
     // constructor(props: Comissao) {
     constructor(props: Omit<Comissao, 'id'>, id?: string) {
@@ -21,30 +23,7 @@ export class Comissao extends User {
         this.organizador = props.organizador;
         this.avaliador = props.avaliador;
         this.chair = props.chair;
-
-        // if (props.adm) {
-        //     this.adm = props.adm
-        // } else {
-        //     this.adm = false;
-        // }
-
-        // if (props.organizador) {
-        //     this.organizador = props.organizador
-        // } else {
-        //     this.organizador = false;
-        // }
-
-        // if (props.avaliador) {
-        //     this.avaliador = props.avaliador
-        // } else {
-        //     this.avaliador = false;
-        // }
-        
-        // if (props.chair) {
-        //     this.chair = props.chair
-        // } else {
-        //     this.chair = false;
-        // }
+        // this.areas = props.areas;
 
         if (id) {
             this.id = id

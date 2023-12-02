@@ -22,13 +22,8 @@ export class ExecuterArea {
         return areaOut;
     }
 
-    async rearAreasByEvent(id: string): Promise<Area[]>{
-        const areaOut: Area[] = await this.daoArea.rearAreasByEvent(id);
-        return areaOut;
-    }
-
-    async updateMany(eventId: string, comissaoId: string ): Promise<number>{
-        const areaOut: number = await this.daoArea.updateMany(eventId, comissaoId);
+    async readAreasByEvent(id: string): Promise<Area[]>{
+        const areaOut: Area[] = await this.daoArea.readAreasByEvent(id);
         return areaOut;
     }
 

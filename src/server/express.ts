@@ -9,8 +9,8 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: 'http://localhost:3000',
-    // origin: '*',
+    // origin: 'http://localhost:3000',
+    origin: '*',
     exposedHeaders: '*',
     allowedHeaders: '*',
     credentials: false,

@@ -10,9 +10,22 @@ export class DaoSala implements ICrudSala {
 
     async create(sala: Sala): Promise<Sala> {
         let newUser: Sala = new Sala(sala);
-
+        
         await prisma.sala.create({
-            data: sala
+            data: {
+                id: sala.id,
+                andar: sala.andar,
+                limitePessoas: sala.limitePessoas,
+                numero: sala.numero,
+                temaSala: sala.temaSala,
+                tipo: sala.tipo,
+                event: {
+                    connect: {id: sala.eventId}
+                }
+            },
+            include: {
+                event: true
+            }
         }).then(async (Sala) => {
             newUser = Sala;
             await prisma.$disconnect()
@@ -28,7 +41,11 @@ export class DaoSala implements ICrudSala {
     async read(): Promise<Sala[]> {
         let users: Sala[] = [];
 
-        await prisma.sala.findMany().then(async (result : any) => {
+        await prisma.sala.findMany({
+            include: {
+                event: true
+            }
+        }).then(async (result : any) => {
             users = result;
             await prisma.$disconnect();
         }).catch(async (e) => {
@@ -46,6 +63,9 @@ export class DaoSala implements ICrudSala {
         await prisma.sala.findUnique({
             where: {
                 id: id
+            },
+            include: {
+                event: true
             }
         }).then(async (Sala) => {
             userReturned = Sala;

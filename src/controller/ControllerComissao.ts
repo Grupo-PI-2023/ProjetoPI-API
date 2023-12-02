@@ -9,9 +9,9 @@ export class ControllerComissao {
 
     async create(req: Request, res: Response): Promise<Response> {
         try {
-            const { email, name, cpf, instituicao, turno, lattes, senha, adm, organizador, avaliador, chair  } = req.body;
+            const { email, name, cpf, instituicao, turno, lattes, senha, adm, organizador, avaliador, chair, areaConhecimento  } = req.body;
             const newComissao = new Comissao({ email, name, cpf, instituicao, turno, lattes, senha, adm, organizador, avaliador, chair });
-            const comissaoCreated = await this.executerComissao.create(newComissao);
+            const comissaoCreated = await this.executerComissao.create(newComissao, areaConhecimento);
             return res.status(200).json({ message: "comissao created sussessfully", comissaoCreated });
         } catch (error) {
             return res.status(204).json(error)
@@ -25,6 +25,25 @@ export class ControllerComissao {
                 return res.status(200).json({ message: "comissao founded", comissao })
             } else {
                 return res.status(204).json({ message: "comissao does not exists" })
+            }
+        } catch (error) {
+            return res.json(error)
+        }
+    }
+
+    async readAdmins(req: Request, res: Response): Promise<Response> {
+        try {
+            const admin = req.query.adm
+            if(admin){
+                const comissao = await this.executerComissao.readAdmins();
+                if (comissao) {
+                    return res.status(200).json({ message: "comissao founded", comissao })
+                } else {
+                    return res.status(204).json({ message: "comissao does not exists" })
+                }
+            }else{
+                const comissoes = await this.executerComissao.read();
+                return res.status(200).json({ message: "comissoes", comissoes })
             }
         } catch (error) {
             return res.json(error)

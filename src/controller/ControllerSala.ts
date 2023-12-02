@@ -12,8 +12,8 @@ export class ControllerSala {
             const { andar, tipo, numero, limitePessoas, temaSala, eventId } = req.body;
             const newSala = new Sala({ andar, tipo, numero, limitePessoas, temaSala, eventId });
 
-            const userCreated = await this.executerSala.create(newSala);
-            return res.status(200).json({ message: "sala created sussessfully", userCreated });
+            const sala = await this.executerSala.create(newSala);
+            return res.status(200).json({ message: "sala created sussessfully", sala });
         } catch (error) {
             return res.status(204).json(error)
         }

@@ -1,5 +1,5 @@
-import { ControllerComissao, ControllerArea, ControllerAluno, ControllerEvent, ControllerSala, ControllerSessao } from "../controller/";
-import { DaoEvent, DaoAluno, DaoArea, DaoComissao, DaoSala, DaoSessao } from "../model/dao/";
+import { ControllerComissao, ControllerArea, ControllerAluno, ControllerEvent, ControllerSala, ControllerSessao } from "../controller";
+import { DaoEvent, DaoAluno, DaoArea, DaoComissao, DaoSala, DaoSessao } from "../model/dao";
 import { ExecuterEvent } from "./ExecuterEvent";
 import { ExecuterComissao } from "./ExecuterComissao";
 import { ExecuterAluno } from "./ExecuterAluno";

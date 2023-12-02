@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -24,19 +21,19 @@ model Comissao {
   organizador      Boolean?
   avaliador        Boolean?
   chair            Boolean?
-  areaConhecimento Area[]
-  Event            Event?
+  Event            Event[]
   Sessao           Sessao?
-
+  areaConhecimento Area[]   @relation("AreaToComissao")
 }
 
 model Area {
-  id         String    @id
-  nome       String
-  evento     Event     @relation(fields: [eventoId], references: [id])
-  Comissao   Comissao? @relation(fields: [comissaoId], references: [id])
-  comissaoId String?
-  eventoId    String
+  id        String     @id
+  nome      String
+  eventoId  String
+  evento    Event      @relation(fields: [eventoId], references: [id])
+  comissoes Comissao[] @relation("AreaToComissao")
+
+  @@index([eventoId], map: "Area_eventoId_fkey")
 }
 
 model Aluno {
@@ -61,7 +58,7 @@ model Event {
   emailEvento      String   @unique
   tipo             String
   assuntoPrincipal String
-  local            String  
+  local            String
   cep              String
   horarioInicio    String
   horarioFim       String
@@ -73,22 +70,24 @@ model Event {
   logo             String?
   periodo          String
   createdAt        DateTime @default(now())
-  comissao         Comissao @relation(fields: [comissaoId], references: [id])
-  comissaoId       String   @unique
+  comissaoId       String
   Area             Area[]
-  Sala             Sala?
+  comissao         Comissao @relation(fields: [comissaoId], references: [id])
+  Sala             Sala[]
+
+  @@index([comissaoId], map: "Event_comissaoId_fkey")
 }
 
-model Sala{
-  id                String   @id
-  andar             Int
-  tipo              String
-  numero            Int      @unique
-  limitePessoas     Int
-  temaSala          String
-  Sessao            Sessao?
-  event             Event @relation(fields: [eventId], references: [id])
-  eventId           String @unique
+model Sala {
+  id            String  @id
+  andar         Int
+  tipo          String
+  numero        Int     @unique
+  limitePessoas Int
+  temaSala      String
+  eventId       String  
+  event         Event   @relation(fields: [eventId], references: [id])
+  Sessao        Sessao?
 }
 
 model Sessao {
@@ -96,20 +95,9 @@ model Sessao {
   tempoSessao       Int
   tempoApresentacao Int
   anfiteatro        Boolean?
-  sala              Sala @relation(fields: [salaId], references: [id])
-  salaId            String @unique
+  salaId            String   @unique
   horario           Int
-  comissao          Comissao @relation(fields: [comissaoId], references: [id])
   comissaoId        String   @unique
-
+  comissao          Comissao @relation(fields: [comissaoId], references: [id])
+  sala              Sala     @relation(fields: [salaId], references: [id])
 }
-
-// model User {
-//   id          String  @id
-//   name        String
-//   email       String  @unique
-//   senha       String
-//   cpf         String
-//   instituicao String
-//   certificado String?
-// }

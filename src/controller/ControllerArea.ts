@@ -40,19 +40,10 @@ export class ControllerArea {
         }
     }
 
-    async rearAreasByEvent(req: Request, res: Response): Promise<Response> {
+    async readAreasByEvent(req: Request, res: Response): Promise<Response> {
         try {
-            const areas = await this.executerArea.rearAreasByEvent(req.params.id);
+            const areas = await this.executerArea.readAreasByEvent(req.params.id);
             return res.status(200).json({ message: "areas", areas })
-        } catch (error) {
-            return res.json(error)
-        }
-    }
-    async updateMany(req: Request, res: Response): Promise<Response> {
-        try {
-            const {eventoId, comissaoId } = req.body;
-            const areas = await this.executerArea.updateMany(eventoId, comissaoId);
-            return res.status(200).json({ message: "areas uptaded", areas })
         } catch (error) {
             return res.json(error)
         }
