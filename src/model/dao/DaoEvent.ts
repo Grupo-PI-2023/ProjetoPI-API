@@ -46,6 +46,9 @@ export class DaoEvent implements ICrudEvent {
         await prisma.event.findUnique({
             where: {
                 id: id
+            },
+            include: {
+                Sala: true
             }
         }).then(async (event) => {
             userReturned = event;

@@ -85,9 +85,11 @@ model Sala {
   numero        Int     @unique
   limitePessoas Int
   temaSala      String
-  eventId       String  
+  eventId       String
   event         Event   @relation(fields: [eventId], references: [id])
   Sessao        Sessao?
+
+  @@index([eventId], map: "Sala_eventId_fkey")
 }
 
 model Sessao {
