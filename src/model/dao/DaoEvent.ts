@@ -30,6 +30,7 @@ export class DaoEvent implements ICrudEvent {
 
         await prisma.event.findMany().then(async (result : any) => {
             users = result;
+            console.log(result)
             await prisma.$disconnect();
         }).catch(async (e) => {
             console.error(e);

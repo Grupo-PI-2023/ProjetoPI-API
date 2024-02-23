@@ -12,8 +12,8 @@ export class ControllerSessao {
             const { tempoSessao, tempoApresentacao, anfiteatro, salaId, horario, comissaoId } = req.body;
             const newSessao = new Sessao({ tempoSessao, tempoApresentacao, anfiteatro, salaId, horario, comissaoId });
 
-            const userCreated = await this.executerSessao.create(newSessao);
-            return res.status(200).json({ message: "sessao created sussessfully", userCreated });
+            const sessaoCreated = await this.executerSessao.create(newSessao);
+            return res.status(200).json({ message: "sessao created sussessfully", sessaoCreated });
         } catch (error) {
             return res.status(204).json(error)
         }
